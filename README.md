@@ -1,3 +1,7 @@
+What's Changed?
+======
+Acceleration and Steering commands have been removed, so that driving your car from your laptop has never been easier!
+
 [![](https://i.imgur.com/UetIFyH.jpg)](#)
 
 Welcome to openpilot
