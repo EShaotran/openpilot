@@ -211,11 +211,12 @@ class CarController(object):
     # toyota can trace shows this message at 42Hz, with counter adding alternatively 1 and 2;
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
-    if ECU.CAM in self.fake_ecus:
-      if self.angle_control:
-        can_sends.append(create_steer_command(self.packer, 0., 0, frame))
-      else:
-        can_sends.append(create_steer_command(self.packer, apply_steer, apply_steer_req, frame))
+    #STEER EDITED OUT (next 5 lines)
+    # if ECU.CAM in self.fake_ecus:
+    #   if self.angle_control:
+    #     can_sends.append(create_steer_command(self.packer, 0., 0, frame))
+    #   else:
+    #     can_sends.append(create_steer_command(self.packer, apply_steer, apply_steer_req, frame))
 
     if self.angle_control:
       can_sends.append(create_ipas_steer_command(self.packer, apply_angle, self.steer_angle_enabled,
@@ -224,11 +225,12 @@ class CarController(object):
       can_sends.append(create_ipas_steer_command(self.packer, 0, 0, True))
 
     # accel cmd comes from DSU, but we can spam can to cancel the system even if we are using lat only control
-    if (frame % 3 == 0 and ECU.DSU in self.fake_ecus) or (pcm_cancel_cmd and ECU.CAM in self.fake_ecus):
-      if ECU.DSU in self.fake_ecus:
-        can_sends.append(create_accel_command(self.packer, apply_accel, pcm_cancel_cmd, self.standstill_req))
-      else:
-        can_sends.append(create_accel_command(self.packer, 0, pcm_cancel_cmd, False))
+    #ACCEL EDITED OUT (next 5 lines)
+    # if (frame % 3 == 0 and ECU.DSU in self.fake_ecus) or (pcm_cancel_cmd and ECU.CAM in self.fake_ecus):
+    #   if ECU.DSU in self.fake_ecus:
+    #     can_sends.append(create_accel_command(self.packer, apply_accel, pcm_cancel_cmd, self.standstill_req))
+    #   else:
+    #     can_sends.append(create_accel_command(self.packer, 0, pcm_cancel_cmd, False))
 
     if CS.CP.enableGasInterceptor:
         # send exactly zero if apply_gas is zero. Interceptor will send the max between read value and apply_gas.
